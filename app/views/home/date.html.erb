@@ -1,0 +1,9 @@
+
+<%if @dates%>
+
+  <% @dates.each do |i|%>
+  <% @a = User.find(i.user_id)%>
+   <%= link_to @a.name, admin2_path(@a.id)%>
+  <%end%>
+
+<%end%>

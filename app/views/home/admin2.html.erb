@@ -1,0 +1,59 @@
+
+<div class="col-lg-6 mx-lg-auto card shadow mt-5">
+
+    <div class="card-header">
+    <h3 class="card-title text-center">Cadidate Details</h3>
+   </div>
+  <div class="card-body">
+  
+  <%= form_with model: @admin2, method: :post, url: admin3_path(@admin2.id) do |form| %>
+  
+  
+   <div class="form-group mb-2">
+   <%= form.label :Name %><br>
+    <%= form.text_field :name, class: "form-control form-control-lg"%>
+  </div>
+  
+  <div class="form-group mb-2">
+   <%= form.label :Email %><br>
+   <%= form.text_field :email , class: "form-control form-control-lg"%>
+  </div >
+  
+  
+  <div class="form-group mb-2">
+    <%= form.label :Interviewer %><br>
+    <%= form.text_field :inter , class: "form-control form-control-lg"%>
+  </div >
+
+  <div class="form-group mb-2">
+    <%= form.label :Set_date %><br>
+    <%= form.text_field :admin_date , class: "form-control form-control-lg"%>
+  </div >
+
+  <div class="form-group mb-2">
+    <%= form.label :Time %><br>
+    <%= form.text_field :time , class: "form-control form-control-lg"%>
+  </div >
+  
+  <div class="form-group mb-2">
+    <%= form.label :First_Round %><br>
+    <%= form.text_field :first , class: "form-control form-control-lg"%>
+  </div >
+   
+  <div class="form-group mb-2">
+    <%= form.label :Second_Round %><br>
+    <%= form.text_field :second , class: "form-control form-control-lg"%>
+  </div >
+   
+  <div class="form-group mb-2">
+    <%= form.label :Third_Round %><br>
+    <%= form.text_field :third , class: "form-control form-control-lg"%>
+  </div >
+  
+  <div>
+   <%= form.submit "update", class: "btn btn-primary btn-lg"  %>
+  </div>
+  <% end %>
+  
+  </div>
+  </div>

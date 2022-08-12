@@ -1,0 +1,4 @@
+<% @ways.each do |i|%>
+  <%@a = User.find(i.user_id)%>
+  <%= @a.name%>
+<%end%>

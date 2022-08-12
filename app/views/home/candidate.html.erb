@@ -1,0 +1,8 @@
+<%if user_signed_in?%>
+  Name:<p class="text-danger"><%= @candidates.name%><br></p>
+  Email:<p class="text-danger"><%= @candidates.email%></p>
+
+  <%= link_to "Aply for drive", drive_path(@candidates.id)%>
+  <%= link_to "track your drive status", track_path(@candidates.id)%>
+  <%= link_to "Result", result_path(@candidates.id)%>
+<%end%>
