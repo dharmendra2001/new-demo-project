@@ -1,0 +1,18 @@
+<% if user_signed_in?%>
+<table class="text-center">
+  <tr>
+  <th>Candidate Name</th>
+  <th>Date</th>
+  <th>Time</th>
+  </tr>
+  
+  <% @interinfo.each do |f|%>
+  <tr>
+    <td class="text-danger"><%= f.name%></td> 
+    <td class="text-success"><%= f.admin_date%></td>
+    <td class="text-primary"><%= f.time%></td>
+  </tr>
+  <%end%>
+  
+</table>
+<%end%>

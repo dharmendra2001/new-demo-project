@@ -51,8 +51,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_10_173857) do
     t.string "first"
     t.string "second"
     t.string "third"
-    t.string "time"
     t.string "admin_date"
+    t.string "time"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

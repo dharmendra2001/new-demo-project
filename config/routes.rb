@@ -20,5 +20,6 @@ Rails.application.routes.draw do
   post "admin3/:id", to: "home#admin3", as: "admin3"
   get "track/:id", to: "home#track", as: "track"
   get "result/:id", to: "home#result", as: "result"
-  
+  get "interinfo/:inter", to: "home#interinfo", as: "interinfo"
+
 end
