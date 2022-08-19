@@ -1,5 +1,7 @@
+<% if user_signed_in?%>
 Name:<p class="text-danger"><%= @track.name%></p>
 Email:<p class="text-danger"><%= @track.email%></p>
-Interviewer Name:<p class="text-danger"><%= @track.inter%></p>
+<!-- Interviewer Name:<p class="text-danger"><%= @track.inter%></p> -->
 Date of Interview:<p class="text-danger"><%= @track.admin_date%></p>
 Time of Interview:<p class="text-danger"><%= @track.time%></p>
+<%end%>

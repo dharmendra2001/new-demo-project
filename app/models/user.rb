@@ -16,5 +16,5 @@ private
     WelcomeMailer.send_greeting_notification(self).deliver_now
  end
 
- enum :user_type, [:admin, :candidate,:inter], default: :candidate
+ enum :user_type, [:admin, :candidate,:inter, :hr], default: :candidate
 end

@@ -21,5 +21,10 @@ Rails.application.routes.draw do
   get "track/:id", to: "home#track", as: "track"
   get "result/:id", to: "home#result", as: "result"
   get "interinfo/:inter", to: "home#interinfo", as: "interinfo"
-
+  get "update_user_data/:id", to: "home#update_user_data", as: "update_user_data"
+  post "admin_update/:id", to: "home#admin_update", as: "admin_update"
+  get "riview/:id", to: "home#riview", as: "riview"
+  post "riview_update/:id", to: "home#riview_update", as: "riview_update" 
+  get "create_drive", to: "home#create_drive", as: "create_drive"
+  post "drive_save", to: "home#drive_save", as: "drive_save"
 end

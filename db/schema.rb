@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_10_173857) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_19_175943) do
   create_table "candidates", force: :cascade do |t|
     t.string "date"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_candidates_on_user_id"
+  end
+
+  create_table "drives", force: :cascade do |t|
+    t.string "drive_date"
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "mydata", force: :cascade do |t|
@@ -53,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_10_173857) do
     t.string "third"
     t.string "admin_date"
     t.string "time"
+    t.string "riview"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

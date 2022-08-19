@@ -1,13 +1,15 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!, except: :index
+  #skip_before_action :authenticate_user!, only: :index
   def index
     
   end
 
-  def detail 
-    @a = User.all
-    if flash[:redirect]=='1'
-      redirect_to root_path
-    end
+  def detail
+      @a = User.all
+      if flash[:redirect]=='1'
+        redirect_to root_path
+      end
   end
 
   def candidate 
@@ -34,7 +36,7 @@ class HomeController < ApplicationController
 
 
   def admins
-    
+  
   end
 
   def admin2 
@@ -81,6 +83,46 @@ class HomeController < ApplicationController
       @interinfo = User.where(inter: current_user.name)
     end
   end
+
+  def update_user_data
+    @update_user_datas = User.find(params[:id])
+  end
+
+  def admin_update
+    @admin_update = User.find(params[:id])
+
+    if @admin_update.update(params.require(:user).permit(:user_type))
+      redirect_to detail_path
+    else
+      redirect_to update_user_data_path
+    end
+  end
+
+  def riview
+    @riview = User.find(params[:id])
+  end
+
+  def riview_update
+    @riview_update = User.find(params[:id])
+
+    if @riview_update.update(params.require(:user).permit(:riview))
+      redirect_to interinfo_path(@riview_update)
+    else
+      redirect_to riview_path
+    end
+  end
+
+  def create_drive
+    # @create_drive = Drive.new
+  end
+
+  def drive_save
+    debugger
+    Drive.create(drive_date: params[:drive_date], role: params[:role])
+    redirect_to admins_path
+  end
+
+
   private
   
   def time_checks_out(t,s)

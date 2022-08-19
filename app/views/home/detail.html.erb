@@ -1,6 +1,5 @@
 
 <%@a.each do |i|%>
-  <%= i.name%><br>
+  <%= link_to i.name, update_user_data_path(i)%><br>
 <%end%>
-</div>
 
