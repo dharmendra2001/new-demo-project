@@ -1,5 +1,8 @@
+
 <% if user_signed_in? && current_user.user_type.upcase == 'INTER'%>
+  <p class="text-danger">Welcome <%= current_user.name.upcase%></p>
 <table class="text-center table table-striped">
+  <p class="text-success"><%= flash[:title]%></p>
   <tr>
   <th>Candidate Name</th>
   <th>Date</th>

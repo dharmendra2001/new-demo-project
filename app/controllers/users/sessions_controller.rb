@@ -31,9 +31,9 @@ class Users::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     if current_user.user_type.upcase=="ADMIN"
-      admins_path
+      access_date_path
     elsif current_user.user_type.upcase=="CANDIDATE"
-      candidate_path(@user)
+      candidate_path(current_user.id)
     else
       interinfo_path(current_user.name)
     end  

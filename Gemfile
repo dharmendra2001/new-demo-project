@@ -73,3 +73,4 @@ end
 
 gem 'devise'
 gem 'cancancan'
+gem 'mysql2'

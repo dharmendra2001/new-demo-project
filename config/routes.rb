@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   get "candidate/:id", to: "home#candidate", as: "candidate"
   get "drive/:id", to: "home#drive", as: "drive"
   post "fillform/:id", to: "home#fillform", as: "fillform"
-  get "admins", to: "home#admins", as: "admins"
   get "date/:data", to: "home#date", as: "date"
   get "way/:date", to: "home#way", as: "way"
   get "admin2/:id", to: "home#admin2", as: "admin2"
@@ -27,4 +26,10 @@ Rails.application.routes.draw do
   post "riview_update/:id", to: "home#riview_update", as: "riview_update" 
   get "create_drive", to: "home#create_drive", as: "create_drive"
   post "drive_save", to: "home#drive_save", as: "drive_save"
+  get "drive_show/:id", to: "home#drive_show", as:"drive_show"
+  get "access_date", to: "home#access_date", as: "access_date"
+  get "name/:date", to: "home#name", as: "name"
+  delete "candidate/:date",to: "home#deleter", as: "deleter"
+  get "information", to: "home#information", as: "information"
+  get "del/:id", to: "home#del", as: "del"
 end

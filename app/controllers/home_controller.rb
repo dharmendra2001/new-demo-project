@@ -6,10 +6,10 @@ class HomeController < ApplicationController
   end
 
   def detail
-      @a = User.all
-      if flash[:redirect]=='1'
-        redirect_to root_path
-      end
+    @a = User.all
+    if flash[:redirect]=='1'
+      redirect_to root_path
+    end
   end
 
   def candidate 
@@ -21,22 +21,25 @@ class HomeController < ApplicationController
   end
 
   def fillform
-    @drives = User.find(params[:id])
     @drives = User.find_by(name: params[:name], email: params[:email])
-    if @drives.candidates.create(date: params[:date])
-        redirect_to root_path
+    @date_data = Candidate.all
+    if current_user.name == @drives.name && current_user.email == @drives.email
+      if @date_data.find_by(date: params[:date], user_id: @drives.id)
+        flash[:notice] = "You have already applied for this drive"
+        redirect_to candidate_path
+      else
+        if @drives.candidates.create(date: params[:date]) && @drives.update(role: params[:role])
+          flash[:notice]="your are registerd successfully"
+          redirect_to candidate_path
+        end
+      end
     else
-        redirect_to root_path
+      flash[:notice] = "Wrong Information"
     end
   end
 
   def date
     @dates = Candidate.where(date: params[:data])
-  end
-
-
-  def admins
-  
   end
 
   def admin2 
@@ -55,11 +58,11 @@ class HomeController < ApplicationController
     ar=str.split('"')
     inter= ar[3]
 
-    if time_checks_out(time,inter)
+    if time_checks_out(time,inter,params[:id])
 
      @update_admin = User.find(params[:id])
     if @update_admin.update(params.require(:user).permit(:name,:email,:passwords,:date,:admin_date,:inter,:time,:first,:second,:third))
-      redirect_to admins_path 
+      redirect_to access_date_path 
     else
       redirect_to admin2_path
     end
@@ -106,6 +109,7 @@ class HomeController < ApplicationController
     @riview_update = User.find(params[:id])
 
     if @riview_update.update(params.require(:user).permit(:riview))
+      flash[:title]="review update successfully"
       redirect_to interinfo_path(@riview_update)
     else
       redirect_to riview_path
@@ -117,30 +121,55 @@ class HomeController < ApplicationController
   end
 
   def drive_save
-    debugger
     Drive.create(drive_date: params[:drive_date], role: params[:role])
-    redirect_to admins_path
+    redirect_to access_date_path
   end
 
+  def drive_show
+    @drive_show = Drive.all
+    candidate
+  end
+
+  def access_date
+    @access_date = Candidate.all
+  end
+
+  def name
+    @name = Candidate.where(date: params[:date])
+  end
+
+  def deleter
+    @name = Candidate.where(date: params[:date])
+    @name.each do|i|
+      i.destroy
+    end
+    redirect_to access_date_path
+  end 
+  
+  def information
+    @information = Drive.all
+  end
+
+  def del
+    @del = Drive.find(params[:id])
+    @del.destroy
+    redirect_to access_date_path
+  end
 
   private
   
-  def time_checks_out(t,s)
+  def time_checks_out(t,s,n)
   condition = true
+  num = User.find(n).time
   unless t.nil?
     #converts time string into int ex:- 6:30 to 630
-    ar3 = t.split(':')
-    i3=ar3[0].to_i*100
-    i3=i3+ar3[1].to_i
-    t=i3
+    t=time_to_num(t)
 
     ar = User.where(inter:s).pluck(:time)
-   
+    ar.delete(num)
     ar.each do |i|
      unless i.nil?
-        ar2 = i.split(':')
-        i2=ar2[0].to_i*100
-        i2=i2+ar2[1].to_i
+        i2=time_to_num(i)
         
         if t.between?(i2,i2+100)
           condition = false
@@ -150,6 +179,12 @@ class HomeController < ApplicationController
     end
   end
   return condition
-end
+  end
+  def time_to_num(t)
+    ar2 = t.split(':')
+    i2=ar2[0].to_i*100
+    i2=i2+ar2[1].to_i
+    return i2
+  end
 
 end

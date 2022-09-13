@@ -1,0 +1,32 @@
+<% if user_signed_in? && current_user.user_type.upcase =="ADMIN"%>
+
+  <%ar=[]%>
+  <% @access_date.each do |i|%>
+    <%unless ar.include? i.date%>
+    <% ar.push(i.date) %> 
+    <%end%>
+  <%end%>
+
+  <div class="container mt-3", style="width: 70rem;">
+    <h3 class="text-danger">Welcome, <%= current_user.name.upcase%></h3>
+    <table class="table table-striped table-bordered text-center bg-light">
+      <tr>
+        <th>Date of Drives</th>
+        <th>Action</th>
+      </tr>
+      <% ar.each do |i|%>
+        <tr>
+          <td><%= link_to i, name_path(i)%></td>
+          <td><button type="button" class="text-light btn btn-outline-danger"><%= link_to "Show",name_path(i)%></button>
+          <button type="button" class="btn btn-outline-primary"><%= link_to "Destroy",deleter_path(i), data: {turbo_method: :delete ,turbo_confirm: "are you sure"}%></td></button>
+        </tr>
+      <%end%>
+    </table>
+    <h3><button type="button" class="btn btn-outline-info"><%= link_to "All_User_List", detail_path%></button></h3>
+  <h3><%= link_to "Create Drive", create_drive_path, class: "text-danger"%></h3>
+  <h3 class="btn btn-outline-info"><%= link_to "Show notice", information_path%></h3>
+  </div>
+  
+<%end%>
+
+
