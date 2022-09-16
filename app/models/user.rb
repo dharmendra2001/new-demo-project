@@ -8,13 +8,13 @@ class User < ApplicationRecord
          :recoverable, 
          :rememberable, 
          :validatable,
-         :confirmable,
+         # :confirmable,
          :trackable
 private
 
- def after_confirmation
-    WelcomeMailer.send_greeting_notification(self).deliver_now
- end
+#  def after_confirmation
+#     WelcomeMailer.send_greeting_notification(self).deliver_now
+#  end
 
  enum :user_type, [:admin, :candidate,:inter], default: :candidate
 end
