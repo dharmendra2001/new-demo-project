@@ -1,0 +1,26 @@
+
+<% if user_signed_in? && current_user.user_type.upcase == 'INTER'%>
+  <p class="text-danger">Welcome <%= current_user.name.upcase%></p>
+<table class="text-center table table-striped">
+  <p class="text-success"><%= flash[:title]%></p>
+  <tr>
+  <th>Candidate Name</th>
+  <th>Date</th>
+  <th>Time</th>
+  <th>Riview</th>
+  </tr>
+  
+  <% @interinfo.each do |f|%>
+  <tr>
+    <td class="text-danger"><%= f.name%></td> 
+    <td class="text-success"><%= f.admin_date%></td>
+    <td class="text-primary"><%= f.time%></td>
+    <td class="text-primary"><%= link_to "Give Riview", riview_path(f)%></td>
+    
+  </tr>
+  <%end%>
+  
+</table>
+<%end%>
+
+

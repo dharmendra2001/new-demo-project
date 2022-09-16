@@ -1,5 +1,5 @@
 
-<%if @dates%>
+<%if @dates && user_signed_in? && current_user.user_type.upcase == 'ADMIN'%>
 
   <% @dates.each do |i|%>
   <% @a = User.find(i.user_id)%>

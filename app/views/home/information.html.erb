@@ -1,0 +1,25 @@
+<% @information.each do |i|%>
+  <%= i.drive_date%>
+  <%= i.role%>
+  <%= link_to "Destroy",del_path(i)%>
+  <hr>
+<%end%>
+
+<div class="container mt-3", style="width: 70rem;">
+  <h3 class="text-danger">Welcome, <%= current_user.name.upcase%></h3>
+  <table class="table table-striped table-bordered text-center bg-light">
+    <tr>
+      <th>Date of Drives</th>
+      <th>Role</th>
+      <th>Action</th>
+    </tr>
+    <% @information.each do |i|%>
+      <tr>
+        <td><%= i.drive_date%></td>
+        <td><%= i.role%></td>
+        <td><button type="button" class="btn btn-outline-primary"><%= link_to "Destroy",del_path(i)%></td></button>
+      </tr>
+    <%end%>
+  </table>
+</div>
+  

@@ -1,7 +1,7 @@
 <% if user_signed_in? && current_user.user_type.upcase == "ADMIN"%>
-  <%@a.each do |i|%>
-    <%= link_to i.name.upcase, update_user_data_path(i)%>
+  <% @name.each do |i|%>
+  <% @a = User.find(i.user_id)%>
+    <%= link_to @a.name, admin2_path(@a.id)%><br>
   <%end%>
   <h6><button type="button" class="btn btn-secondary"><%= link_to "Back", access_date_path%></button></h6>
 <%end%>
-

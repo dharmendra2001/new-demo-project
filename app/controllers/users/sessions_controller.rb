@@ -14,12 +14,12 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # DELETE /resource/sign_out
-  def destroy
-    super
-    flash[:redirect]='1'
+  # def destroy
+  #   super
+  #   flash[:redirect]='1'
 
-    # redirect_to root
-  end
+  #   # redirect_to root
+  # end
 
   # protected
 
@@ -28,12 +28,15 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+
   def after_sign_in_path_for(resource)
-    if @user.user_type.upcase=="ADMIN"
-      admins_path
+    if current_user.user_type.upcase=="ADMIN"
+      access_date_path
+    elsif current_user.user_type.upcase=="CANDIDATE"
+      candidate_path(current_user.id)
     else
-      @user.user_type.upcase=="CANDIDATE"
-      candidate_path(@user)
-    end
+      interinfo_path(current_user.name)
+    end  
   end
+
 end
